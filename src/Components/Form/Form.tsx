@@ -12,9 +12,6 @@ const Form = () => {
 
   const onFormSubmit = async (e:React.FormEvent) => {
     e.preventDefault();
-    setMessage({
-      ...message,
-    })
     const data = new URLSearchParams();
     data.set('message', message.message);
     data.set('author', message.name);
@@ -22,6 +19,11 @@ const Form = () => {
       method: 'post',
       body: data,
     });
+    setMessage({
+      ...message,
+      name:'',
+      message:'',
+    })
   };
 
   const onNameChange = (e:React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -31,7 +33,7 @@ const Form = () => {
 
 
   return (
-    <div className='border-bottom mb-3'>
+    <div className='border-bottom mb-3 bg-danger'>
       <form className="d-flex flex-column ps-3 pe-3" onSubmit={onFormSubmit}>
         <div className="d-flex justify-content-center mt-4  mb-4">
           <input type="text" placeholder="Your username" name='name' value={message.name} onChange={onNameChange} className="rounded-4"/>
